@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/file.css" />
+    <title>Add Service</title>
+  </head>
+  <body>
+    <form
+      method="POST"
+      action="/services/add-service"
+      enctype="multipart/form-data"
+    >
+      <label for="title">Title</label>
+      <input type="text" name="title" />
+      <label for="description">Description</label>
+      <input type="text" name="description" />
+      <label for="imageUrl">ImageUrl</label>
+      <input type="file" name="imageUrl" />
+      <input type="submit" value="SAVE" />
+    </form>
+  </body>
+</html>
