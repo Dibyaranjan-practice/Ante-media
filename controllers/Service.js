@@ -18,12 +18,25 @@ exports.getAllService = async (req, res, next) => {
   res.render("service/displayservice", { services });
 };
 
-exports.getEditService = (req, res, next) => {
-  res.render("service/editservice");
+exports.getEditService = async (req, res, next) => {
+  const cur_service2 = await Service.findByPk(req.params.id);
+  res.render("service/editservice", { service: cur_service2 });
 };
 
-exports.postEditService = (req, res, next) => {
-  res.render("service/editservice");
+exports.postEditService = async (req, res, next) => {
+  const cur_service = await Service.findByPk(req.params.id);
+  cur_service.title = req.body.title;
+  cur_service.description = req.body.description;
+  cur_service.imageUrl =
+    "http://localhost:5000/public/images/" + req.file.originalname;
+  cur_service
+    .save()
+    .then(() => {
+      res.redirect("/services");
+    })
+    .catch((error) => {
+      res.json("Some error occured");
+    });
 };
 
 exports.getDeleteService = (req, res, next) => {

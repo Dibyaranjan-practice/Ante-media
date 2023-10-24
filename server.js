@@ -38,7 +38,8 @@ app.use(
 
 app.use(["/login", "/users"], authRoutes);
 app.use((req, res, next) => {
-  if (req.url !== "/favicon.ico") req.session.currentUrl = req.url;
+  if (req.url != undefined && req.url !== "/favicon.ico")
+    req.session.currentUrl = req.url;
   if (!req.session.isLoggedIn) {
     return res.render("auth/login", { error: false });
   }
