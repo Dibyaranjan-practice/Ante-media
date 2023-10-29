@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add User</title>
-  </head>
+  <%- include("./../layouts/head",{pageName: "Add User" });%>
   <body>
+    <a href="/users"> All User</a>
     <% if(error){%> Username Already Exists <%}%> <% if(success){%> User created
     successfully <%}%>
     <form method="post" action="/users/add-user">
@@ -14,6 +11,7 @@
       <label for="password">Password</label>
       <input type="password" name="password" required /><br />
       <input type="submit" value="Create" />
+      <input type="reset" value="Reset" />
     </form>
   </body>
 </html>

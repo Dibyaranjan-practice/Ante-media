@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Services</title>
-  </head>
+  <%- include("./../layouts/head",{pageName: "All Service" });%>
   <body>
     <a href="/services/add-service">Add Service</a>
-    All Services are listed below <%if(services.length==0){%> No Services listed
-    <%} else {%> <%services.forEach(service=>{%>
+    <%if(services.length==0){%> No Services Present <%} else {%>
+    <%services.forEach(service=>{%>
     <div>
       <p><%= service.title %></p>
       <p><%= service.description %></p>

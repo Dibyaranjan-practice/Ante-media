@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Clientele</title>
+  </head>
+  <body>
+    <a href="/clientele/add-clientele"> Add Clientele</a>
+    <%clientele.forEach((c)=>{%>
+    <img src="<%= c.imageUrl %>" width="200px" alt="not found" />
+    <a href="/clientele/delete-clientele/<%=c.id%>"> Delete</a>
+    <%});%>
+  </body>
+</html>

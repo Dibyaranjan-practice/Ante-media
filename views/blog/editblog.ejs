@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EditBlog</title>
-  </head>
+  <%- include("./../layouts/head",{pageName: "Edit Blog" });%>
   <body>
+    <a href="/blogs">All Blogs</a>
+      <a href="/dashboard">Dashboard</a>
     <form method="POST" action="/blogs/edit-blog/<%= blog.id%>" enctype="multipart/form-data">
       <input type="hidden" name="id" value="<%= blog.id%>"
       <label for="title">Title</label>
@@ -14,13 +12,14 @@
       <label for="description">Description</label>
       <textarea
         name="description"
-        
+        rows="14" cols="20"
         required
       ><%=blog.description%></textarea>
       <%= possibleErrors.description %>
       <label for="imageUrl">ImageUrl</label>
       <input type="file" name="imageUrl" accept="image/*" required />
       <input type="submit" value="SAVE" />
+      <input type="reset" value="Reset" />
     </form>
   </body>
 </html>

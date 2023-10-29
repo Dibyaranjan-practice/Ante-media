@@ -22,7 +22,7 @@ const Service = sequelize.define(
       allowNull: false,
     },
   },
-  { timestamps: false, createdAt: false, updatedAt: false }
+  { updatedAt: false }
 );
 
 Service.sync();

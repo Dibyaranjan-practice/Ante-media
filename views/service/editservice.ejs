@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Service</title>
-  </head>
+  <%- include("./../layouts/head",{pageName: "Edit Service" });%>
   <body>
+    <a href="/services">All Services</a>
+    <a href="/dashboard">Dashboard</a>
     <form
       method="POST"
       action="/services/edit-service/<%=service.id%>"
@@ -15,10 +13,13 @@
       <label for="title">Title</label>
       <input type="text" name="title" value="<%=service.title%>" />
       <label for="description">Description</label>
-      <input type="text" name="description" value="<%=service.description%>" />
+      <textarea name="description" rows="14" cols="20" required>
+<%=service.description%></textarea
+      >
       <label for="imageUrl">ImageUrl</label>
       <input type="file" name="imageUrl" />
       <input type="submit" value="SAVE" />
+      <input type="reset" value="Reset" />
     </form>
   </body>
 </html>

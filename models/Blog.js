@@ -22,7 +22,7 @@ const Blog = sequelize.define(
       allowNull: false,
     },
   },
-  { timestamps: false, createdAt: false, updatedAt: false }
+  { updatedAt: false }
 );
 
 Blog.sync();

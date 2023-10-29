@@ -2,18 +2,28 @@ const express = require("express");
 const path = require("path");
 const multer = require("multer");
 const session = require("express-session");
+const crypto = require("crypto");
+const cors = require("cors");
+require("dotenv").config();
 
 const authRoutes = require("./routes/Auth");
 const blogRoutes = require("./routes/Blog");
 const blogApiRoutes = require("./routes/BlogApi");
 const serviceRoutes = require("./routes/Service");
 const serviceApiRoutes = require("./routes/ServiceApi");
+const userRoutes = require("./routes/User");
+const clienteleRoutes = require("./routes/Clientele");
+const clienteleApiRoutes = require("./routes/ClienteleApi");
 
+const corsOptions = {
+  origin: [process.env.ORIGIN, process.env.ORIGIN2],
+  optionsSuccessStatus: 200,
+};
 const app = express();
-
+app.use(cors(corsOptions));
 app.use(
   session({
-    secret: "demoskey",
+    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: false,
   })
@@ -30,13 +40,15 @@ app.use(
         cb(null, "public/images");
       },
       filename: (req, file, cb) => {
-        cb(null, file.originalname);
+        cb(null, crypto.randomUUID() + file.originalname);
       },
     }),
   }).single("imageUrl")
 );
-
-app.use(["/login", "/users"], authRoutes);
+app.use("/api/blogs", blogApiRoutes);
+app.use("/api/services", serviceApiRoutes);
+app.use("/api/clientele", clienteleApiRoutes);
+app.use("/auth", authRoutes);
 app.use((req, res, next) => {
   if (req.url != undefined && req.url !== "/favicon.ico")
     req.session.currentUrl = req.url;
@@ -45,15 +57,17 @@ app.use((req, res, next) => {
   }
   next();
 });
-app.use("/api/blogs", blogApiRoutes);
+app.use("/clientele", clienteleRoutes);
+app.use("/users", userRoutes);
 app.use("/blogs", blogRoutes);
-app.use("/api/services", serviceApiRoutes);
 app.use("/services", serviceRoutes);
 app.get(["/dashboard", "/"], (req, res, next) => {
   res.render("dashboard");
 });
 app.use("/", (req, res, next) => {
-  res.render("404");
+  res.status(400).end("This page doesn't exist");
 });
 
-app.listen(5000);
+app.listen(process.env.PORT, () => {
+  console.log("server started with" + process.env.PORT);
+});

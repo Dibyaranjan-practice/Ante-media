@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./../layouts/head",{pageName: "All Users" });%>
+  <body>
+<a href="/users/add-user"> Add User</a>
+<%users.forEach(user=>{%>
+    <p><%= user.username %></p>
+    <a href="/users/delete-user/<%= user.username %>">Delete</a>
+    <%});%>
+  </body>
+  </body>
+</html>
